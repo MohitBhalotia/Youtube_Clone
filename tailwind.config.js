@@ -1,11 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}", // Match your file structure
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [require("tailwind-scrollbar")],
+  variants: {
+    scrollbar: ["rounded"], // Optional: Enables rounded scrollbar styles
+  },
+};
