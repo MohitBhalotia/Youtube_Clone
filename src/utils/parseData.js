@@ -8,6 +8,7 @@ export const parseData = async (items) => {
   try {
     const videoIds = [];
     const channelIds = [];
+
     items.forEach((item) => {
       channelIds.push(item.snippet.channelId);
       videoIds.push(item.id.videoId);
@@ -53,7 +54,7 @@ export const parseData = async (items) => {
           videoId: item.id.videoId,
           videoTitle: item.snippet.title,
           videoDescription: item.snippet.description,
-          videoThumbnail: item.snippet?.medium?.url,
+          videoThumbnail: item.snippet?.thumbnails?.medium?.url,
           videoLink: `https://wwww.youtube.com/watch?v=${item.id.videoId}`,
           videoDuration: parseVideoDuration(
             videoData[index].contentDetails.duration

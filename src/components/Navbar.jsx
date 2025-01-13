@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <div className="flex py-3 justify-between w-full  text-white px-4 h-14 items-center bg-[#0F0F0F]  sticky top-0">
+    <div className="flex py-3 justify-between w-full  text-white px-4 h-16  items-center bg-[#0F0F0F]  sticky top-0 z-50">
       <div className="flex gap-2 items-center text-2xl ">
         {/* Hamburger Menu */}
         <div>
