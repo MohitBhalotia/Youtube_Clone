@@ -1,6 +1,7 @@
 import { convertRawtostring } from "./convertRawtoString";
 import { parseVideoDuration } from "./parseVideoDuration";
 import { timeSince } from "./timeSince";
+import axios from "axios";
 const apiKey = import.meta.env.VITE_YOUTUBE_DATA_API_KEY;
 
 export const parseData = async (items) => {
@@ -23,12 +24,15 @@ export const parseData = async (items) => {
     // console.log(channelsData);
 
     const parsedChannelData = [];
-    channelsData.forEach((channelData) =>
+    channelsData.forEach((channel) =>
       parsedChannelData.push({
-        id: channelData.id,
-        image: channelData.snippet.thumbnails.default.url,
+        id: channel.id,
+        image:
+          channel?.snippet?.thumbnails?.default?.url ||
+          "some_default_image_url",
       })
     );
+    // console.log(parsedChannelData);
 
     const {
       data: { items: videoData },
@@ -42,14 +46,14 @@ export const parseData = async (items) => {
     const parseData = [];
     items.forEach((item, index) => {
       const { image: channelImage } = parsedChannelData.find(
-        (data) => data.id === item.snippet.channelId
+        (data) => data.id === item.snippet?.channelId
       );
       if (channelImage) {
         parseData.push({
           videoId: item.id.videoId,
           videoTitle: item.snippet.title,
           videoDescription: item.snippet.description,
-          videoThumbnail: item.snippet.medium.url,
+          videoThumbnail: item.snippet?.medium?.url,
           videoLink: `https://wwww.youtube.com/watch?v=${item.id.videoId}`,
           videoDuration: parseVideoDuration(
             videoData[index].contentDetails.duration
@@ -64,6 +68,7 @@ export const parseData = async (items) => {
         });
       }
     });
+    // console.log(parseData);
     return parseData;
   } catch (error) {
     console.log(error);
