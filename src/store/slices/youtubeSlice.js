@@ -59,7 +59,7 @@ const youtubeSlice = createSlice({
       })
       .addCase(getVideoDetails.fulfilled, (state, action) => {
         if (action.payload && action.payload.parsedData) {
-          state.currentPlaying = action.payload.currentPlaying;
+          state.currentPlaying = action.payload.parsedData;
         }
       });
   }
