@@ -52,38 +52,41 @@ const Sidebar = () => {
     },
   ];
   return (
-    <div className="text-white bg-[#0F0F0F] text-lg px-2 w-[250px] h-[1500px] ">
-      {/* Home Section */}
-      <div className="border-b-2 border-gray-500 flex flex-col gap-2 py-2 px-2">
-        {navLinks.map((item) => (
-          <div
-            key={item.name}
-            className="flex gap-4 items-center hover:bg-[#3F3F3F] py-2 px-4 rounded-2xl"
-          >
-            {item.icon}
-            {item.name}
-          </div>
-        ))}
+    <div
+  className="text-white bg-[#0F0F0F] text-lg px-2 w-[250px] h-screen fixed top-100 left-0"
+>
+  {/* Home Section */}
+  <div className="border-b-2 border-gray-500 flex flex-col gap-2 py-2 px-2">
+    {navLinks.map((item) => (
+      <div
+        key={item.name}
+        className="flex gap-4 items-center hover:bg-[#3F3F3F] py-2 px-4 rounded-2xl"
+      >
+        {item.icon}
+        {item.name}
       </div>
+    ))}
+  </div>
 
-      {/* You Section */}
-      <div className="flex gap-2 font-bold items-center hover:bg-[#3F3F3F] py-2 px-4 rounded-2xl mt-2">
-        You
-      </div>
+  {/* You Section */}
+  <div className="flex gap-2 font-bold items-center hover:bg-[#3F3F3F] py-2 px-4 rounded-2xl mt-2">
+    You
+  </div>
 
-      {/* Library Section */}
-      <div className="border-b-2 border-gray-600 flex flex-col gap-4 py-4 px-2">
-        {yourLinks.map((item) => (
-          <div
-            key={item.name}
-            className="flex gap-4 items-center hover:bg-[#3F3F3F] py-2 px-4 rounded-2xl"
-          >
-            {item.icon}
-            {item.name}
-          </div>
-        ))}
+  {/* Library Section */}
+  <div className="border-b-2 border-gray-600 flex flex-col gap-4 py-4 px-2">
+    {yourLinks.map((item) => (
+      <div
+        key={item.name}
+        className="flex gap-4 items-center hover:bg-[#3F3F3F] py-2 px-4 rounded-2xl"
+      >
+        {item.icon}
+        {item.name}
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   );
 };
 

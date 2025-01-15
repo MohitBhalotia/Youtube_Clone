@@ -4,27 +4,24 @@ import axios from "axios";
 
 const apiKey = import.meta.env.VITE_YOUTUBE_DATA_API_KEY;
 
-export const getHomeVideos = createAsyncThunk(
-  "youtubeApp/homeVideos",
+export const getSearchVideos = createAsyncThunk(
+  "youtubeApp/searchVideos",
   async (isNext, { getState }) => {
     const {
-      youtubeApp: { nextPageToken: nextPageTokenFromState },
+      youtubeApp: { nextPageToken: nextPageTokenFromState, videos,searchTerm },
     } = getState();
-
-    // API call to fetch videos
     const response = await axios.get(
-      `https://youtube.googleapis.com/youtube/v3/search?maxResults=20&q=''&key=${apiKey}&part=snippet&type=video&${
+      `https://youtube.googleapis.com/youtube/v3/search?maxResults=20&q=${searchTerm}&key=${apiKey}&part=snippet&type=video&${
         isNext ? `pageToken=${nextPageTokenFromState}` : ""
       }`
     );
-
     const items = response?.data?.items;
     const parsedData = await parseData(items);
+    // console.log(parsedData);
 
     return {
-      parsedData, // Return only the new data
-      nextPageToken: response?.data?.nextPageToken,
+      parsedData: [...videos, ...parsedData],
+      nextPageToken: nextPageTokenFromState,
     };
   }
 );
-

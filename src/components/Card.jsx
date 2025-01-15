@@ -1,23 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
   return (
-    <div className="w-70 flex flex-col gap-3">
+    <div className="w-full  flex flex-col gap-3">
       {/* Video Thumbnail and Duration */}
       <div className="relative">
+        <Link to={`/watch/${data.videoId}`}>
         <img
           src={data.videoThumbnail || "placeholder-thumbnail.jpg"}
           alt={data.videoTitle || "Video thumbnail"}
-          className="w-full h-44 object-cover rounded-lg"
+          className="w-full h-40 sm:h-44 md:h-48 lg:h-56 object-cover rounded-xl"
           loading="lazy"
         />
-        <span className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-1.5 py-0.5 rounded">
+        </Link>
+        <span className="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs px-2 py-0.5 rounded">
           {data.videoDuration || "00:00"}
         </span>
       </div>
 
-      {/* Channel Image and Video Details */}
-      <div className="flex gap-3">
+      {/* Video Info */}
+      <div className="flex gap-3 items-start">
         {/* Channel Image */}
         <div className="flex-shrink-0">
           <a href="#">
@@ -30,10 +33,10 @@ const Card = ({ data }) => {
           </a>
         </div>
 
-        {/* Video Info */}
-        <div className="flex flex-col">
+        {/* Textual Info */}
+        <div className="flex flex-col flex-1">
           {/* Video Title */}
-          <h3 className="text-sm font-medium text-white line-clamp-2">
+          <h3 className="text-sm font-semibold text-white line-clamp-2">
             <a href="#" className="hover:text-gray-300">
               {data.videoTitle || "Video Title"}
             </a>
@@ -47,7 +50,7 @@ const Card = ({ data }) => {
           </div>
 
           {/* Views and Age */}
-          <div className="text-xs text-gray-400 mt-1">
+          <div className="text-xs text-gray-500 mt-1">
             <span className="after:content-['•'] after:mx-1">
               {data.videoViews || "0"} views
             </span>
