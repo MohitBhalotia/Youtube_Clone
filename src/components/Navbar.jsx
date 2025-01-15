@@ -5,7 +5,7 @@ import Search from "./Search";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { GoBell } from "react-icons/go";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSearchTerm, clearVideos } from "../store/slices/youtubeSlice";
 import { getSearchVideos } from "../store/reducers/getSearchVideos";
@@ -36,9 +36,12 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <div>
+        <Link to={'/'}>
+          <div>
           <Logo />
         </div>
+        </Link>
+        
       </div>
 
       {/* Search Bar */}

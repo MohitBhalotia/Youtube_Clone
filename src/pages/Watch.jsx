@@ -19,7 +19,7 @@ const Watch = () => {
     (state) => state.youtubeApp?.currentPlaying
   );
   const recommendedVideos = useSelector(
-    (state) => state.youtubeApp?.recommendedVideos
+    (state) => state.youtubeApp?.recommendedVideo
   );
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Watch = () => {
 
   useEffect(() => {
     if (currentPlaying && id) {
-      dispatch(getRecommendedVideo(id));
+      dispatch(getRecommendedVideo());
     }
   }, [currentPlaying, id, dispatch]);
 
@@ -109,7 +109,7 @@ const Watch = () => {
             {currentPlaying.videoViews} views • {currentPlaying.videoAge}
           </span>
           <div className="mt-2 text-gray-300  pt-2">
-          <p className="text-sm">{currentPlaying.videoDescription}</p>
+          <p className="text-sm line-clamp-1">{currentPlaying.videoDescription}</p>
           <a href="#" className="text-blue-400 hover:underline mt-2 block">
             Show more
           </a>
@@ -119,7 +119,7 @@ const Watch = () => {
       </div>
 
       {/* Recommended Videos Section */}
-      <div className="lg:w-1/4 p-4 overflow-y-auto border-l border-gray-600">
+      <div className="lg:w-1/4 p-4 overflow-y-auto ">
         <h2 className="text-lg font-bold mb-4">Up Next</h2>
         <div className="space-y-4">
           {recommendedVideos?.length > 0 ? (
