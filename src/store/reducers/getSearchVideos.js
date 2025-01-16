@@ -20,8 +20,8 @@ export const getSearchVideos = createAsyncThunk(
     // console.log(parsedData);
 
     return {
-      parsedData: [...videos, ...parsedData],
-      nextPageToken: nextPageTokenFromState,
+      parsedData,
+      nextPageToken: response?.data?.nextPageToken,
     };
   }
 );

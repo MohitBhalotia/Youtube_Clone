@@ -7,7 +7,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { GoBell } from "react-icons/go";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changeSearchTerm, clearVideos } from "../store/slices/youtubeSlice";
+import { changeSearchTerm, clearSearch, clearVideos } from "../store/slices/youtubeSlice";
 import { getSearchVideos } from "../store/reducers/getSearchVideos";
 
 const Navbar = () => {
@@ -22,7 +22,7 @@ const Navbar = () => {
     e.preventDefault();
     if (location.pathname !== "/search") navigate("/search");
     else {
-      dispatch(clearVideos);
+      dispatch(clearVideos());
       dispatch(getSearchVideos(false));
     }
   };
@@ -37,7 +37,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link to={'/'}>
-          <div>
+          <div onClick={()=>dispatch(clearSearch())}>
           <Logo />
         </div>
         </Link>

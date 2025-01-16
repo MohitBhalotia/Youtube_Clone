@@ -34,13 +34,15 @@ const youtubeSlice = createSlice({
       .addCase(getHomeVideos.fulfilled, (state, action) => {
         if (action.payload && action.payload.parsedData) {
           const videoMap = new Map();
-  
+
           // Add existing videos to the Map
           state.videos.forEach((video) => videoMap.set(video.videoId, video));
-  
+
           // Add new videos to the Map (overwrites duplicates if any)
-          action.payload.parsedData.forEach((video) => videoMap.set(video.videoId, video));
-  
+          action.payload.parsedData.forEach((video) =>
+            videoMap.set(video.videoId, video)
+          );
+
           // Convert the Map back to an array
           state.videos = Array.from(videoMap.values());
           state.nextPageToken = action.payload.nextPageToken; // Update the token
@@ -48,10 +50,14 @@ const youtubeSlice = createSlice({
       })
       .addCase(getSearchVideos.fulfilled, (state, action) => {
         if (action.payload && action.payload.parsedData) {
-          state.videos = action.payload.parsedData;
-          state.nextPageToken = action.payload.nextPageToken;
+          state.searchResults = [
+            ...state.searchResults,
+            ...action.payload.parsedData,
+          ]; // Append videos
+          state.nextPageToken = action.payload.nextPageToken; // Update the token
         }
       })
+
       .addCase(getRecommendedVideo.fulfilled, (state, action) => {
         if (action.payload && action.payload.parsedData) {
           state.recommendedVideo = action.payload.parsedData;
@@ -62,8 +68,7 @@ const youtubeSlice = createSlice({
           state.currentPlaying = action.payload.parsedData;
         }
       });
-  }
-  
+  },
 });
 export const { clearVideos, changeSearchTerm, clearSearch } =
   youtubeSlice.actions;

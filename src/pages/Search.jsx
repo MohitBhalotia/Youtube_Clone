@@ -4,36 +4,38 @@ import Spinner from "../components/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getSearchVideos } from "../store/reducers/getSearchVideos";
 import SearchCard from "../components/SearchCard";
-import { clearVideos } from "../store/slices/youtubeSlice";
+import { clearSearch, clearVideos } from "../store/slices/youtubeSlice";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Fetch videos from Redux store
-  const videos = useSelector((state) => state.youtubeApp.videos);
+  const videos = useSelector((state) => state.youtubeApp.searchResults);
   const searchTerm = useSelector((state) => state.youtubeApp.searchTerm);
-
+  const nextPageToken=useSelector((state)=>state.youtubeApp.nextPageToken)
   // Initial data fetch on component mount
   useEffect(() => {
     dispatch(clearVideos());
     if (searchTerm === "") {
       navigate("/");
+      dispatch(clearSearch())
     } else {
       dispatch(getSearchVideos(false));
+      
     }
   }, [dispatch, navigate, searchTerm]);
 
   return (
-    <div className="h-screen flex flex-col bg-[#0F0F0F] text-white overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-[#0F0F0F] text-white ">
       {/* Content Section */}
-      <div className="flex-1 overflow-y-scroll">
+      <div className="">
         {/* Infinite Scroll for Videos */}
         {videos.length ? (
           <InfiniteScroll
             dataLength={videos.length}
             next={() => dispatch(getSearchVideos(true))}
-            hasMore={videos.length < 500}
+            hasMore={!!nextPageToken}
             loader={<Spinner />}
             style={{ overflow: "visible" }} // Allow parent to handle scrolling
           >

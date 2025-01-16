@@ -6,7 +6,7 @@ const SearchCard = ({ data }) => {
     <div className="flex bg-[#0F0F0F] text-white p-4 rounded-lg gap-4 shadow-md">
       {/* Thumbnail Section */}
       <div className="relative flex-shrink-0">
-        <Link>
+        <Link to={`/watch/${data.videoId}`}>
           <img
             src={data.videoThumbnail}
             alt="Thumbnail"

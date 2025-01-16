@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getHomeVideos } from "../store/reducers/getHomeVideos";
+import { getHomeVideos} from "../store/reducers/getHomeVideos";
+import { clearVideos } from "../store/slices/youtubeSlice";
 import Spinner from "../components/Spinner";
 import Card from "../components/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -10,9 +11,10 @@ const Home = () => {
 
   // Fetch videos from Redux store
   useEffect(() => {
+    dispatch(clearVideos());
     dispatch(getHomeVideos(false));
   }, [dispatch]);
-
+  const nextPageToken=useSelector((state)=>state.youtubeApp.nextPageToken)
   const videos = useSelector((state) => state.youtubeApp.videos);
 
   return (
@@ -24,7 +26,7 @@ const Home = () => {
           <InfiniteScroll
             dataLength={videos.length}
             next={() => dispatch(getHomeVideos(true))}
-            hasMore={videos.length < 500}
+            hasMore={!!nextPageToken}
             loader={<Spinner />}
             style={{ overflow: "visible" }}
             scrollThreshold={0.8} //

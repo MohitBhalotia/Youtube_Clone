@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RecommendedVideoCard = ({ video }) => {
-  console.log(video);
+  // console.log(video);
   
   return (
     <Link to={`/watch/${video.videoId}`} className="flex items-start space-x-4">
