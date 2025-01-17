@@ -12,7 +12,7 @@ const RecommendedVideoCard = ({ video }) => {
         className="w-40 h-20 object-cover rounded"
       />
       <div className="flex-1">
-        <h3 className="text-sm font-semibold">{video.videoTitle}</h3>
+        <h3 className="text-sm font-semibold line-clamp-2">{video.videoTitle}</h3>
         <p className="text-xs text-gray-400">{video.channelInfo.name}</p>
         <p className="text-xs text-gray-400">
           {video.videoViews} views • {video.videoAge}

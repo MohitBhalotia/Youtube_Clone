@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ data }) => {
   return (
-    <div className="w-full  flex flex-col gap-3">
+    <div className="w-full  flex flex-col gap-2">
       {/* Video Thumbnail and Duration */}
       <div className="relative">
         <Link to={`/watch/${data.videoId}`}>

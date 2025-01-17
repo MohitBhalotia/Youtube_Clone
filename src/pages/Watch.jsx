@@ -47,7 +47,7 @@ const Watch = () => {
   return (
     <div className="flex flex-col lg:flex-row bg-[#0F0F0F] text-[#F1F1F1]">
       {/* Video Section */}
-      <div className="flex-1 lg:w-3/4 p-4">
+      <div className="flex-1 lg:w-3/4 px-4 py-2">
         <iframe
           className="rounded-xl"
           src={`https://www.youtube.com/embed/${id}?autoplay=1`}
@@ -119,7 +119,7 @@ const Watch = () => {
       </div>
 
       {/* Recommended Videos Section */}
-      <div className="lg:w-1/4 p-4 overflow-y-auto ">
+      <div className="lg:w-1/4 p-2 overflow-y-auto ">
         <h2 className="text-lg font-bold mb-4">Up Next</h2>
         <div className="space-y-4">
           {recommendedVideos?.length > 0 ? (
